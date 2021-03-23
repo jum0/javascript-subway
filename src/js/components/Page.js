@@ -1,7 +1,7 @@
 import Component from './Component';
 
 class Page extends Component {
-  _routingUrl;
+  _router;
   #initialUrl;
 
   constructor(props) {
@@ -18,8 +18,8 @@ class Page extends Component {
   }
 
   route = (path, shouldPushState = true) => {
-    if (!this._routingUrl) {
-      alert('Page 인스턴스에 url이 정의되어 있지 않습니다.');
+    if (!this._router) {
+      alert('Page 인스턴스에 _router가 정의되어 있지 않습니다.');
     }
 
     if (shouldPushState) {
@@ -27,8 +27,8 @@ class Page extends Component {
       history.pushState({ path: actualPath }, null, actualPath);
     }
 
-    this._routingUrl[path].render();
-    this._routingUrl[path].initEvent();
+    this._router[path].render();
+    this._router[path].initEvent();
   };
 }
 
