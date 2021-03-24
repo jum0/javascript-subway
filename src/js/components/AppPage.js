@@ -39,7 +39,7 @@ class AppPage extends Page {
 
   initEvent() {
     window.addEventListener('popstate', e => {
-      this.route(e.state.path, false);
+      this.route('/' + e.state.path.split('/')[3], false);
     });
 
     $('header').addEventListener('click', this._onAnchorClicked);
