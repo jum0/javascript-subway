@@ -9,10 +9,6 @@ class SignupComponent extends Component {
     super(props);
   }
 
-  initialize() {
-    this.initEvent();
-  }
-
   initEvent() {
     $(`#${ID_SELECTOR.SIGNUP_FORM}`).addEventListener(
       'submit',
@@ -42,7 +38,6 @@ class SignupComponent extends Component {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Content-Length': 96,
         },
       });
     } catch (err) {

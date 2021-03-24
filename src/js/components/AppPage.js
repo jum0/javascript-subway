@@ -11,19 +11,20 @@ import { show, hide } from '../utils/DOM.js';
 class AppPage extends Page {
   constructor(props) {
     super(props);
+  }
 
+  initState() {
     this.state = new State({
-      [STATE_KEY.LOGIN_RESPONSE]: {
-        accessToken: '',
-      },
+      [STATE_KEY.ACCESS_TOKEN]: KEYWORD.LOGOUT,
     });
 
     this.state.setListener(
-      STATE_KEY.LOGIN_RESPONSE,
+      STATE_KEY.ACCESS_TOKEN,
       this.handleNavButtonToChange
     );
-    this.state.setListener(STATE_KEY.LOGIN_RESPONSE, this.handlePageToRedirect);
+    this.state.setListener(STATE_KEY.ACCESS_TOKEN, this.handlePageToRedirect);
 
+    //TODO: 라우트를 initRoute 같은 걸로 나눌 수 있을까?
     this._router = {
       [URL.HOME]: new HomeComponent(),
       [URL.STATION]: new StationComponent({ appState: this.state }),
@@ -47,14 +48,12 @@ class AppPage extends Page {
 
   #onLogout = () => {
     this.state.setData({
-      loginResponse: {
-        accessToken: KEYWORD.LOGOUT,
-      },
+      [STATE_KEY.ACCESS_TOKEN]: KEYWORD.LOGOUT,
     });
   };
 
-  handleNavButtonToChange = loginResponse => {
-    const isLogout = loginResponse.accessToken === KEYWORD.LOGOUT;
+  handleNavButtonToChange = accessToken => {
+    const isLogout = accessToken === KEYWORD.LOGOUT;
 
     if (isLogout) {
       this.#renderGuestNavBar();
@@ -64,8 +63,8 @@ class AppPage extends Page {
     this.#renderUserNavBar();
   };
 
-  handlePageToRedirect = loginResponse => {
-    const isLogout = loginResponse.accessToken === KEYWORD.LOGOUT;
+  handlePageToRedirect = accessToken => {
+    const isLogout = accessToken === KEYWORD.LOGOUT;
 
     if (isLogout) {
       this.route(URL.LOGIN);

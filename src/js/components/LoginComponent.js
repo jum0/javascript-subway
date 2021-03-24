@@ -14,13 +14,9 @@ class LoginComponent extends Component {
   constructor(props) {
     super(props);
 
-    if (!this.props?.appState.getData(STATE_KEY.LOGIN_RESPONSE)) {
-      alert('not exist loginResponse');
+    if (!this.props?.appState.getData(STATE_KEY.ACCESS_TOKEN)) {
+      alert('not exist accessToken');
     }
-  }
-
-  initialize() {
-    this.initEvent();
   }
 
   initEvent() {
@@ -48,13 +44,12 @@ class LoginComponent extends Component {
         body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Content-Length': 72,
         },
       });
       alert(ALERT_MESSAGE.LOGIN_SUCCESS);
 
-      const loginResponse = await response.json();
-      this.props.appState.setData({ loginResponse });
+      const { accessToken } = await response.json();
+      this.props.appState.setData({ [STATE_KEY.ACCESS_TOKEN]: accessToken });
     } catch (err) {
       alert(err.message);
       return;
