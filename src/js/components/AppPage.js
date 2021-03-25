@@ -38,6 +38,7 @@ class AppPage extends Page {
   }
 
   initEvent() {
+    //TODO: popstate 정리하기
     window.addEventListener('popstate', e => {
       this.route('/' + e.state.path.split('/')[3], false);
     });
