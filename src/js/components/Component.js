@@ -14,12 +14,15 @@ class Component {
   initialize() {
     this.initEvent();
     this.initState();
+    this.initStateListener();
     this.initLoad();
   }
 
   initLoad() {}
 
   initState() {}
+
+  initStateListener() {}
 
   initEvent() {}
 

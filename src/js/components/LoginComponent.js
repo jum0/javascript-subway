@@ -13,7 +13,7 @@ class LoginComponent extends Component {
   constructor(props) {
     super(props);
 
-    if (!this.props?.loginState.Data) {
+    if (!this.props?.accessTokenState.Data) {
       alert('not exist accessToken');
     }
   }
@@ -48,7 +48,7 @@ class LoginComponent extends Component {
       alert(ALERT_MESSAGE.LOGIN_SUCCESS);
 
       const { accessToken } = await response.json();
-      this.props.loginState.Data = accessToken;
+      this.props.accessTokenState.Data = accessToken;
     } catch (err) {
       alert(err.message);
       return;
