@@ -36,7 +36,7 @@ const fetchMyInfo = async (url, option) => {
   return response;
 };
 
-const fetchStationList = async (url, option) => {
+const fetchStationCreation = async (url, option) => {
   const response = await fetch(url, option);
 
   if (response.status === 400) {
@@ -50,7 +50,7 @@ const fetchStationList = async (url, option) => {
   return response;
 };
 
-//TODO: fetchStationList랑 기능이 완전히 똑같음
+//TODO: fetchStationCreation랑 기능이 완전히 똑같음
 const fetchStationNameRevision = async (url, option) => {
   const response = await fetch(url, option);
 
@@ -75,11 +75,26 @@ const fetchStationRemoval = async (url, option) => {
   return response;
 };
 
+const fetchLineCreation = async (url, option) => {
+  const response = await fetch(url, option);
+
+  if (response.status === 400) {
+    throw new Error(ALERT_MESSAGE.DUPLICATED_LINE_FAIL);
+  }
+
+  if (!response.ok) {
+    throw new Error(response.status);
+  }
+
+  return response;
+};
+
 export {
   fetchSignup,
   fetchLogin,
   fetchMyInfo,
-  fetchStationList,
+  fetchStationCreation,
   fetchStationNameRevision,
   fetchStationRemoval,
+  fetchLineCreation,
 };
